@@ -546,45 +546,29 @@ BinarySearchTree::ConstIterator BinarySearchTree::max() const
 }
 BinarySearchTree::ConstIterator BinarySearchTree::min(const Key &key) const
 {   
-    ConstIterator result = cend();
-    if (_root)
+    auto er = equalRange(key);
+    auto min = er.first;
+    for (auto it = er.first; it != er.second; ++it)
     {
-        Value minimum = std::numeric_limits<Value>::max();
-        std::pair<ConstIterator, ConstIterator> r = equalRange(key);
-        auto p1 = r.first;
-        auto p2 = r.second;
-        while (p1 != p2)
+        if (max -> second > it -> second)
         {
-            if (minimum > p1 -> second)
-            {
-                minimum = p1 -> second;
-                result = p1;
-            }
-            p1++;
+            max = it;
         }
     }
-    return result;
+    return ConstIterator(it);
 }
 BinarySearchTree::ConstIterator BinarySearchTree::max(const Key &key) const
 {   
-    ConstIterator result = cend();
-    if (_root)
+    auto er = equalRange(key);
+    auto max = er.first;
+    for (auto it = er.first; it != er.second; ++it)
     {
-        Value maximum = std::numeric_limits<Value>::lowest();
-        std::pair<ConstIterator, ConstIterator> r = equalRange(key);
-        auto p1 = r.first;
-        auto p2 = r.second;
-        while (p1 != p2)
+        if (max -> second < it -> second)
         {
-            if (maximum < p1 -> second)
-            {
-                maximum = p1 -> second;
-                result = p1;
-            }
-            p1++;
+            max = it;
         }
     }
-    return result;
+    return ConstIterator(it);
 }
 BinarySearchTree::Iterator BinarySearchTree::begin()
 {
