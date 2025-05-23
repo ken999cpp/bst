@@ -550,12 +550,12 @@ BinarySearchTree::ConstIterator BinarySearchTree::min(const Key &key) const
     auto min = er.first;
     for (auto it = er.first; it != er.second; ++it)
     {
-        if (max -> second > it -> second)
+        if (min -> second > it -> second)
         {
-            max = it;
+            min = it;
         }
     }
-    return ConstIterator(it);
+    return ConstIterator(min);
 }
 BinarySearchTree::ConstIterator BinarySearchTree::max(const Key &key) const
 {   
@@ -568,7 +568,7 @@ BinarySearchTree::ConstIterator BinarySearchTree::max(const Key &key) const
             max = it;
         }
     }
-    return ConstIterator(it);
+    return ConstIterator(max);
 }
 BinarySearchTree::Iterator BinarySearchTree::begin()
 {
